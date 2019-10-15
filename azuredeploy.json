@@ -5,19 +5,19 @@
     },
     "variables": {
         "storageAccountName": "[concat('kspstorage', uniqueString(resourceGroup().id))]",
-        "iotHubName": "[concat('ksp-IoTHub', uniqueString(resourceGroup().id))]",
-        "streamingJob": "[concat('ksp-streamingJob', uniqueString(resourceGroup().id))]",
-        "webAppName": "[concat('ksp-webApp', uniqueString(resourceGroup().id))]",
-        "appServiceName": "[concat('ksp-appService', uniqueString(resourceGroup().id))]",
-        "serviceBus": "[concat('ksp-serviceBus', uniqueString(resourceGroup().id))]",
-        "serviceBusQueue": "[concat('ksp-serviceBusQueue', uniqueString(resourceGroup().id))]",
+        "iotHubName": "[concat('IoTHub', uniqueString(resourceGroup().id))]",
+        "streamingJob": "[concat('streamingJob', uniqueString(resourceGroup().id))]",
+        "webAppName": "[concat('webApp', uniqueString(resourceGroup().id))]",
+        "appServiceName": "[concat('appService', uniqueString(resourceGroup().id))]",
+        "serviceBus": "[concat('serviceBus', uniqueString(resourceGroup().id))]",
+        "serviceBusQueue": "[concat('serviceBusQueue', uniqueString(resourceGroup().id))]",
         "sbVersion": "2017-04-01",
-        "AuthRules_sb_queue": "ksp-AuthRules_sb_queue",
-        "serviceBusQueue_endpoint": "ksp-serviceBusQueue_endpoint",
+        "AuthRules_sb_queue": "AuthRules_sb_queue",
+        "serviceBusQueue_endpoint": "serviceBusQueue_endpoint",
         "queueAuthorizationRuleResourceId": "[resourceId('Microsoft.ServiceBus/namespaces/queues/authorizationRules', variables('serviceBus'), variables('serviceBusQueue'), variables('AuthRules_sb_queue'))]",
         "storageAccountId": "[concat(resourceGroup().id,'/providers/Microsoft.Storage/storageAccounts/', variables('storageAccountName'))]",
-        "consumerGroupName": "ksp-streamingJobs",
-        "logicAppName": "[concat('ksp-logicApp', uniqueString(resourceGroup().id))]"
+        "consumerGroupName": "streamingJobs",
+        "logicAppName": "[concat('logicApp', uniqueString(resourceGroup().id))]"
     },
     "resources": [
         {
@@ -49,7 +49,17 @@
             "apiVersion": "2017-07-01",
             "name": "[variables('logicAppName')]",
             "location": "[resourceGroup().location]",
-            "properties": {}
+            "properties": {
+                  "definition": {
+                     "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+                     "contentVersion": "1.0.0.0",
+                     "parameters": {},
+                     "triggers": {},
+                     "actions": {},
+                     "outputs": {}
+                 },
+                 "parameters": {}
+            }
         },
         {
             "type": "Microsoft.ServiceBus/namespaces/queues",
