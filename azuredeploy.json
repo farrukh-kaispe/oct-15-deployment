@@ -17,7 +17,7 @@
         "queueAuthorizationRuleResourceId": "[resourceId('Microsoft.ServiceBus/namespaces/queues/authorizationRules', variables('serviceBus'), variables('serviceBusQueue'), variables('AuthRules_sb_queue'))]",
         "storageAccountId": "[concat(resourceGroup().id,'/providers/Microsoft.Storage/storageAccounts/', variables('storageAccountName'))]",
         "consumerGroupName": "ksp-streamingJobs",
-        "logicAppName": "[concat('ksp-logicApp', uniqueString(resourceGroup().id))]",
+        "logicAppName": "[concat('ksp-logicApp', uniqueString(resourceGroup().id))]"
     },
     "resources": [
         {
@@ -37,13 +37,17 @@
             "name": "pid-8e29efca-8d11-5ccd-bebc-c9c26ba902ac", 
             "type": "Microsoft.Resources/deployments" ,
             "properties":{
-                "mode":"Incremental"
+                "mode":"Incremental",
+                "templateLink": {
+                "uri": "https://raw.githubusercontent.com/farrukh-kaispe/oct-15-deployment/master/azuredeploy.json",
+                "contentVersion": "1.0.0.0"
+                }
             }
         },
         {
             "type": "Microsoft.Logic/workflows",
             "apiVersion": "2017-07-01",
-            "name": "[parameters('workflows_kspLogicApp_name')]",
+            "name": "[variables('logicAppName')]",
             "location": "[resourceGroup().location]",
             "properties": {}
         },
