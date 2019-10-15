@@ -4,7 +4,7 @@
     "parameters": {
     },
     "variables": {
-        "storageAccountName": "[concat('ksp-storage', uniqueString(resourceGroup().id))]",
+        "storageAccountName": "[concat('kspstorage', uniqueString(resourceGroup().id))]",
         "iotHubName": "[concat('ksp-IoTHub', uniqueString(resourceGroup().id))]",
         "streamingJob": "[concat('ksp-streamingJob', uniqueString(resourceGroup().id))]",
         "webAppName": "[concat('ksp-webApp', uniqueString(resourceGroup().id))]",
